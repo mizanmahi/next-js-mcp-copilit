@@ -2,7 +2,7 @@
 
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
-import { useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { NavItem } from './types';
 
 type OrbitalCommandRingProps = {
@@ -77,12 +77,15 @@ function MagneticNode({ item, index, active, expanded, mobile, onJumpTo }: Magne
 
 export default function OrbitalCommandRing({ navItems, activeSection, onJumpTo, heroCollapsed }: OrbitalCommandRingProps) {
   const [expanded, setExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
-  const isMobile = useMemo(() => {
-    if (typeof window === 'undefined') {
-      return false;
-    }
-    return window.matchMedia('(max-width: 767px)').matches;
+  useEffect(() => {
+    const media = window.matchMedia('(max-width: 767px)');
+    const update = () => setIsMobile(media.matches);
+    update();
+
+    media.addEventListener('change', update);
+    return () => media.removeEventListener('change', update);
   }, []);
 
   return (

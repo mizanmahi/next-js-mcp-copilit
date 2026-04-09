@@ -1,6 +1,6 @@
 'use client';
 
-import { Menu, X } from 'lucide-react';
+import { Menu, Volume2, VolumeX, X } from 'lucide-react';
 import { FormEvent, useEffect, useState, useRef } from 'react';
 import BootScreen from '@/components/landingPage/BootScreen';
 import CyberGrid from '@/components/landingPage/CyberGrid';
@@ -25,7 +25,6 @@ export default function Home() {
   const [showSkip, setShowSkip] = useState(false);
   const [bootText, setBootText] = useState('');
   const [cursorMode, setCursorMode] = useState<'default' | 'active' | 'eye'>('default');
-  const [statusTooltip, setStatusTooltip] = useState(false);
   const [soundOn, setSoundOn] = useState(false);
   const [contactMode, setContactMode] = useState<'chat' | 'classic'>('chat');
   const [chatInput, setChatInput] = useState('');
@@ -368,6 +367,15 @@ export default function Home() {
       <CyberGrid />
       <ProgressArc navItems={NAV_ITEMS} activeSection={activeSection} progress={scrollProgress} />
       <OrbitalCommandRing navItems={NAV_ITEMS} activeSection={activeSection} onJumpTo={jumpTo} heroCollapsed={heroPassed} />
+      <button
+        type="button"
+        onClick={() => setSoundOn((current) => !current)}
+        className="fixed bottom-5 left-5 z-50 grid h-11 w-11 place-items-center rounded-full border border-cyan-300/50 bg-slate-900/80 text-cyan-100 backdrop-blur-xl transition hover:bg-cyan-300/12"
+        aria-label={soundOn ? 'Disable ambient sound' : 'Enable ambient sound'}
+        data-cursor="active"
+      >
+        {soundOn ? <Volume2 size={17} /> : <VolumeX size={17} />}
+      </button>
 
       <button
         type="button"

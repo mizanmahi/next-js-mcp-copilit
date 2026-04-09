@@ -45,11 +45,12 @@ export default function ContactSection({
       <div className="mt-3 inline-flex gap-2 rounded-full border border-white/15 bg-white/5 p-1">
         <button
           type="button"
-          className={contactMode === 'chat' ? 'active' : ''}
+          className={[
+            'rounded-full px-3 py-1.5 text-xs text-cyan-100',
+            contactMode === 'chat' ? 'bg-cyan-300/20' : '',
+          ].join(' ')}
           onClick={() => setContactMode('chat')}
           data-cursor="active"
-          style={contactMode === 'chat' ? { background: 'rgba(0,245,212,0.2)' } : undefined}
-          className="rounded-full px-3 py-1.5 text-xs text-cyan-100"
         >
           Chat Mode
         </button>
